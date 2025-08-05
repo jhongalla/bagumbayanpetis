@@ -1,0 +1,42 @@
+{%extends 'vaccination/vaccination.html'%}
+{%block vax%}
+{%for i in rw%}
+<tr > 
+    <td style="display: none;">{{i[0]}}</td>
+    <td><input type="text" class="form-control" value="{{i[1]}}" id="pet"></td>
+    <td><input type="date" class="form-control" id="date_vaccine" value="{{i[2]}}"></td>
+    <td><input type="text" class="form-control" id="vaccine" value="{{i[3]}}"></td>
+    <td><input type="text" class="form-control" id="lotno" value="{{i[4]}}"></td>
+    <td><input type="date" class="form-control" id="date_next_vaccine" value="{{i[5]}}"></td>
+    <td><input type="text" class="form-control" id="vet_lic_no" value="{{i[6]}}"></td>
+    <td style="text-align: center;">
+    <a href="{{url_for('vac.vax_delete',i=i[0])}}" class="btn btn-danger btn-sm">Delete</a>
+    </td>  
+</tr>
+{%endfor%}
+<script>
+    $('#vax_update').click(function(){
+        var pet=$('#pet').val();
+        var date_vaccine=$('#date_vaccine').val();
+        var vaccine=$('#vaccine').val();
+        var lotno=$('#lotno').val();
+        var date_next_vax=$('#date_next_vaccine').val();
+        var vet_lic_no=$('#vet_lic_no').val();
+
+        $.ajax({
+            url:"{{url_for('vac.new_vaccination')}}",
+            type:'POST',
+            data:{'pet':pet,
+                'date_vax':date_vaccine,
+                'vax':vaccine,
+                'lotno':lotno,
+                'date_next_vax':date_next_vax,
+                'vet_lic_no':vet_lic_no
+            },
+            success:function(res){
+                    alert(res.msg)            }
+        })
+
+    })
+</script>   
+{%endblock%}

@@ -1,0 +1,56 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PET VACCINATION CARD</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="icon" href="{{url_for('static',filename='logo.png')}}" type="image/icon type">
+    <script src="{{url_for('static',filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+</head>
+<nav class="navbar-sm bg-primary">
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <img src="{{url_for('static',filename='bag.png')}}" alt="" style="width: 40px;padding: 5px;">
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-light" href="{{url_for('reg.entry')}}">Registration Entry</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-light" href="{{url_for('vac.vaccination')}}">Vaccination</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-light" href="{{url_for('report.home')}}">Reports</a>
+  </li>
+</ul>
+</nav>
+
+<body>
+<div class=main>
+{%block main%}
+<div style="width: 80%;margin: auto;height: 100px;padding: 20%; color: teal;">
+<p id="clock" style="text-align: center; font-family: 'arial black';font-size: 50px;"></p>
+<p id="date" style="text-align: center;"></p>
+</div>
+<script>
+(function () {
+
+  var clockElement = document.getElementById( "clock" );
+
+  function updateClock ( clock ) {
+    clock.innerHTML = new Date().toLocaleTimeString();
+  }
+
+  setInterval(function () {
+      updateClock( clockElement );
+  }, 1000);
+
+
+  document.getElementById("date").innerHTML = Date();
+}());
+</script>
+{%endblock%}
+
+</body>
+</div>

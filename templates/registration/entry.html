@@ -1,0 +1,141 @@
+{%extends 'index.html'%}
+{%block main%}
+<h4>REGISTRATION ENTRY</h4>
+<hr>
+<div class="diventry">
+<div class="row">
+    <div class="col-md-2 mb-4   ">
+        <label  class="lbl"for="">Pet Number</label>
+        <input type="text" class="form-control" id="petnumber"  >
+    </div>
+    <div class="col-md-10 mb-4   ">
+        <label  class="lbl"for="">Pangalan ng Alaga</label>
+        <input type="text" class="form-control" id="petname"  >
+    </div>
+</div>
+<div class="row">
+            <div class="col-md-4 mb-4">
+                <label  class="lbl"for="">Klase ng Hayop</label>
+                <input type="text" class="form-control" id="pettype"  >
+            </div>
+            <div class="col-md-4 mb-4">
+                <label  class="lbl"for="">Kasarian ng Alaga</label>
+                <select type="text" class="form-select" id="petsex">
+                    <option>--</option>
+                    <option>MALE</option>
+                    <option>FEMALE</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-4">
+                <label  class="lbl" classfor="">Edad ng Alaga</label>
+                <input type="text" class="form-control" id="petage"  >
+            </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <label  class="lbl"for="">Lahi ng Alaga</label>
+        <input type="text" class="form-control" id="petbreed"  >
+    </div>
+    <div class="col-md-4 mb-4">
+            <label  class="lbl"for="">Kulay ng Alaga</label>
+            <input type="text" class="form-control" id="petcolor"  >
+    </div>
+    <div class="col-md-4 mb-4">
+            <label  class="lbl"for="">Araw ng Kapanganakan</label>
+            <input type="date" class="form-control" id="petbirthday"  >
+    
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4 ">
+        <label  class="lbl"for="">Pangalan ng May-ari</label>
+        <input type="text" class="form-control" id="petowner"  >
+    </div>
+    <div class="col-md-4 mb-4 ">
+        <label  class="lbl"for="">Address ng Tirahan</label>
+        <input type="text" class="form-control" id="petaddress"  >
+    </div>
+    <div class="col-md-4 mb-4 ">
+        <label  class="lbl"for="">Barangay</label>
+        <select type="text" class="form-select" id="petbarangay">
+            <option>--</option>
+            <OPTION>BAI SARIFINANG</OPTION>
+            <OPTION>BIWANG</OPTION>
+            <OPTION>BUSOK</OPTION>
+            <OPTION>CHUA</OPTION>
+            <OPTION>DAGUMA</OPTION>
+            <OPTION>DALUGA</OPTION>
+            <OPTION>KABULANAN</OPTION>
+            <OPTION>KANULAY</OPTION>
+            <OPTION>KAPAYA</OPTION>
+            <OPTION>KINAYAO</OPTION>
+            <OPTION>MASIAG</OPTION>
+            <OPTION>MONTEVERDE</OPTION>
+            <OPTION>POBLACION</OPTION>
+            <OPTION>SANTO NIÑO</OPTION>
+            <OPTION>SISON</OPTION>
+            <OPTION>SOUTH SEPAKA</OPTION>
+            <OPTION>SUMILIL</OPTION>
+            <OPTION>TITULOK</OPTION>
+            <OPTION>TUKA</OPTION>
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-2">
+        <label  class="lbl"for="">Cellphone / Telephone Number</label>
+        <input type="text" class="form-control" id="petcontact"  >
+    </div>
+</div>
+<hr>
+    <button class="btn btn-primary btn-sm" id="btnsave"> Save </button>
+    <button class="btn btn-primary btn-sm" id="addvac">Vaccination</button>
+    <script>
+        $('#btnsave').click(function(){
+            $.ajax({
+                url:"{{url_for('reg.entry')}}",
+                type:'post',
+                data:{'no':$('#petnumber').val(),
+                      'name':$('#petname').val(),
+                      'type':$('#pettype').val(),
+                      'sex':$('#petsex').val(),
+                      'age':$('#petage').val(),
+                      'breed':$('#petbreed').val(),
+                      'color':$('#petcolor').val(),
+                      'birthday':$('#petbirthday').val(),
+                      'owner':$('#petowner').val(),
+                      'address':$('#petaddress').val(),
+                      'brgy':$('#petbarangay').val(),
+                      'contact_no':$('#petcontact').val(),
+
+                },
+                success:function(res){
+                    $('#msg').html(res)
+                    $('#msg').html(res.msg)
+                    $('#msg').css("color",'green')
+                }
+            })})
+
+    </script>
+    <script>
+        $('#addvac').click(function(){
+            if($('#petnumber').val()!=''){
+                window.location='/vaccination/addvaccination/'+ $('#petnumber').val() 
+            }else{
+                window.location='/registration'
+            }
+            
+        })
+    </script>
+    
+</div>
+<p id="msg" style="text-align: center;"></p>
+<hr>
+<style>
+    .form-control{text-transform: uppercase;}
+</style>
+{%endblock%}

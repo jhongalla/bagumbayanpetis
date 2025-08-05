@@ -1,0 +1,32 @@
+{%extends 'reports/reports.html'%}
+{%block reports%}
+<table class="table table-borderless-sm">
+<thead>
+    <tr>
+        <th>BARANGAY</th>
+        <th>TYPES</th>
+
+        <th style="text-align: center;">FIGURE</th>
+        <th style="text-align: center;">MALE</th>
+        <th style="text-align: center;">FEMALE</th>
+    </tr>
+</thead>
+{%for b,i in rw|groupby(0)%}
+<tr>
+    <td>{{b}}</td>
+</tr>
+    {%for d in i%}
+        <tr>
+            <td></td>
+            <td>{{d[1].upper()}}</td>
+            <td style="text-align: center;">{{d[2]}}</td>
+            <td style="text-align: center;">{{d[3]}}</td>
+            <td style="text-align: center;">{{d[4]}}</td>
+            
+
+        </tr>
+    {%endfor%}
+
+{%endfor%}    
+</table>
+{%endblock%}
